@@ -1,12 +1,12 @@
 import React from 'react'
-import ListOfVideos from './ListOfVideos'
-import NewVideo from "./NewVideo"
+import ListOfAlbums from './ListOfAlbums'
+import NewAlbum from "./NewAlbum"
 
 export function App() {
     return (
         <div>
-            <ListOfVideos/>
-            <NewVideo/>
+            <ListOfAlbums/>
+            <NewAlbum/>
         </div>
     )
 }

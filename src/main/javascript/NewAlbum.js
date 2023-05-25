@@ -1,6 +1,6 @@
 import React from "react"
 
-class NewVideo extends React.Component {
+class NewAlbum extends React.Component {
     constructor(props) {
         super(props)
         this.state = {name: ""}
@@ -14,7 +14,7 @@ class NewVideo extends React.Component {
 
     async handleSubmit(event) {
         event.preventDefault()
-        await fetch("/api/videos", {
+        await fetch("/api/albums", {
             method: "POST",
             headers: {
                 "Content-type":
@@ -37,4 +37,4 @@ class NewVideo extends React.Component {
     }
 }
 
-export default NewVideo
+export default NewAlbum

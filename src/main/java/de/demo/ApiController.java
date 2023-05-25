@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ApiController {
 
-  private final VideoService videoService;
+  private final AlbumService albumService;
 
-  public ApiController(VideoService videoService) {
-    this.videoService = videoService;
+  public ApiController(AlbumService albumService) {
+    this.albumService = albumService;
   }
 
-  @GetMapping("/api/videos")
-  public List<Video> all() {
-    return videoService.getVideos();
+  @GetMapping("/api/albums")
+  public List<Album> all() {
+    return albumService.getAlbums();
   }
 
-  @PostMapping("/api/videos")
-  public Video newVideo(@RequestBody Video newVideo) {
-    return videoService.create(newVideo);
+  @PostMapping("/api/albums")
+  public Album newVideo(@RequestBody Album newAlbum) {
+    return albumService.create(newAlbum);
   }
 }

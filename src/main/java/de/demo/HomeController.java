@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class HomeController {
 
-  private final VideoService videoService;
+  private final AlbumService albumService;
 
-  public HomeController(VideoService videoService) {
-    this.videoService = videoService;
+  public HomeController(AlbumService albumService) {
+    this.albumService = albumService;
   }
 
   @GetMapping("/")
   public String index(Model model) {
-    model.addAttribute("videos", videoService.getVideos());
+    model.addAttribute("albums", albumService.getAlbums());
     return "index";
   }
 
@@ -26,9 +26,9 @@ public class HomeController {
     return "react";
   }
 
-  @PostMapping("/new-video")
-  public String newVideo(@ModelAttribute Video newVideo) {
-    videoService.create(newVideo);
+  @PostMapping("/new-album")
+  public String newAlbum(@ModelAttribute Album newAlbum) {
+    albumService.create(newAlbum);
     return "redirect:/";
   }
 }

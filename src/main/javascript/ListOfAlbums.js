@@ -1,13 +1,13 @@
 import React from "react"
 
-class ListOfVideos extends React.Component {
+class ListOfAlbums extends React.Component {
     constructor(props) {
         super(props)
         this.state = {data: []}
     }
 
     async componentDidMount() {
-        let json = await fetch("/api/videos").then(r => r.json())
+        let json = await fetch("/api/albums").then(r => r.json())
         this.setState({data: json})
     }
 
@@ -16,11 +16,12 @@ class ListOfVideos extends React.Component {
             <ul>
                 {this.state.data.map(item =>
                     <li>
-                        {item.name}
+                        {item.title}
+                        
                     </li>)}
             </ul>
         )
     }
 }
 
-export default ListOfVideos
+export default ListOfAlbums
