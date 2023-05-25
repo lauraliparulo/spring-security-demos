@@ -6,14 +6,27 @@
 
 <ul>
   {{#albums}}
-    <li>{{artist}} - {{title}} - {{year}} </li>
+    <li>{{artist}} - {{title}} - {{yearOfRelease}} </li>
   {{/albums}}
 </ul>
 
+<hr />
 ADD new:
 <form action="/new-album" method="post">
   Artist<input type="text" name="artist">
     Title<input type="text" name="title">
-      Year<input type="text" name="year">
+      Year<input type="text" name="yearOfRelease">
   <button type="submit">Submit</button>
+</form>
+
+
+<hr />
+SEARCH:
+
+<form action="/multi-field-search" method="post">
+  <label for="name">Title:</label>
+  <input type="text" name="title">
+  <label for="description">Description:</label>
+  <input type="text" name="description">
+  <button type="submit">Search</button>
 </form>
