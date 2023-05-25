@@ -1,4 +1,4 @@
-package de.demo.repo;
+package de.demo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,32 +7,33 @@ import jakarta.persistence.Id;
 @Entity
 public class Album {
 
-  private @Id String id;
+  private @Id @GeneratedValue Long id;
   private String title;
   private String artist;
-  private Integer yearOfRelease;
+  private int yearOfRelease;
   private String description;
 
-//  protected Album() {
-//    this(null, null, 0);
-//  }
-//
-//
-//  public Album(String title, String artist, int year) {
-//	super();
-//	this.id = null;
-//	this.title = title;
-//	this.artist = artist;
-//	this.year = year;
-//}
+  protected Album() {
+	    this(null, null,0);
+	  }
+
+	  
+  public Album(String title, String artist, int yearOfRelease) {
+	  this.id = null;
+	this.title = title;
+	this.artist = artist;
+	this.yearOfRelease = yearOfRelease;
+}
 
 
 
-public String getId() {
+
+
+public Long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

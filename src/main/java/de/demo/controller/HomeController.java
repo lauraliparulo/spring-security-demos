@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import de.demo.model.Album_r;
-import de.demo.repo.Album;
+import de.demo.model.Album;
 import de.demo.service.AlbumSearchDTO;
 import de.demo.service.AlbumService;
+import de.demo.service.NewAlbumDTO;
 
 @Controller
 public class HomeController {
@@ -34,7 +34,7 @@ public class HomeController {
   }
 
   @PostMapping("/new-album")
-  public String newAlbum(@ModelAttribute Album_r newAlbum) {
+  public String newAlbum(@ModelAttribute NewAlbumDTO newAlbum) {
     albumService.create(newAlbum);
     return "redirect:/";
   }
