@@ -1,12 +1,15 @@
 # SPRING-tests-demo
 
-this code is based on the example found on the book:
-
-<a href="https://www.packtpub.com/product/learning-spring-boot-30-third-edition/9781803233307?utm_source=github&utm_medium=repository&utm_campaign=9781803233307"><img src="https://static.packt-cdn.com/products/9781803233307/cover/smaller" alt="" height="256px" align="right"></a>
-
-[Learning Spring Boot 3.0](https://www.packtpub.com/product/learning-spring-boot-30-third-edition/9781803233307?utm_source=github&utm_medium=repository&utm_campaign=9781803233307), published by Packt.
+this code is based on the example found on the book "Learning Spring Boot 3.0" by Packt Publishing
 
 
+To run the application, first make sure node, npm and the packages listed in the package.json files are installed by runing:
 
+> mvn generate-resources
 
-**TO BE EXTENDED**
+The install the application:
+
+> mvn install
+
+Then run the Application java class called "RestReactDemoApplication".
+
