@@ -1,5 +1,6 @@
-package de.demo.model;
+package de.demo.entity.album;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -10,19 +11,40 @@ public class Album {
   private @Id @GeneratedValue Long id;
   private String title;
   private String artist;
+  private String username;
   private int yearOfRelease;
   private String description;
 
-  protected Album() {
-	    this(null, null,0);
+  @Column(nullable = false) 
+  private String genre;
+
+  public String getGenre() {
+	return genre;
+}
+
+
+public void setGenre(String genre) {
+	this.genre = genre;
+}
+
+
+public void setYearOfRelease(int yearOfRelease) {
+	this.yearOfRelease = yearOfRelease;
+}
+
+
+public  Album() {
+	    this(null, null,0, null,null);
 	  }
 
 	  
-  public Album(String title, String artist, int yearOfRelease) {
+  public Album(String title, String artist, int yearOfRelease, String genre, String username) {
 	  this.id = null;
+	  this.username = username;
 	this.title = title;
 	this.artist = artist;
 	this.yearOfRelease = yearOfRelease;
+	this.genre = genre;
 }
 
 
@@ -39,7 +61,17 @@ public Long getId() {
 
 
 
-  public String getTitle() {
+  public String getUsername() {
+	return username;
+}
+
+
+public void setUsername(String username) {
+	this.username = username;
+}
+
+
+public String getTitle() {
 	return title;
 }
 

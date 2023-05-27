@@ -4,11 +4,20 @@
   Powered by Spring Boot 3.0
 </p>
 
+<h3>User Profile</h3>
 <ul>
-  {{#albums}}
-    <li>{{artist}} - {{title}} - {{yearOfRelease}} </li>
-  {{/albums}}
+    <li>Username: {{authentication.name}}</li>
+    <li>Authorities: {{authentication.authorities}}</li>
 </ul>
+
+<form action="/logout" method="post">
+    <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}">
+    <button type="submit">Logout</button>
+</form>
+
+<hr>
+
+
 
 <hr />
 ADD new:
@@ -16,6 +25,8 @@ ADD new:
   Artist<input type="text" name="artist">
     Title<input type="text" name="title">
       Year<input type="text" name="yearOfRelease">
+            Genre<input type="text" name="genre">
+                    <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}">
   <button type="submit">Submit</button>
 </form>
 
@@ -23,10 +34,26 @@ ADD new:
 <hr />
 SEARCH:
 
-<form action="/multi-field-search" method="post">
-  <label for="name">Title:</label>
-  <input type="text" name="title">
-  <label for="description">Description:</label>
-  <input type="text" name="description">
-  <button type="submit">Search</button>
+<form action="/search" method="post">
+    <label for="value">Search:</label>
+    <input type="text" name="value">
+    <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}">
+    <button type="submit">Search</button>
 </form>
+
+{{#search}}
+    Search by Title, Artist, etc . (not working for year!): {{value}}
+{{/search}}
+
+
+<ul>
+  {{#albums}}
+    <li>{{artist}} - {{title}} - {{yearOfRelease}} - {{genre}}  
+    
+              <form action="/delete/albums/{{id}}" method="post">
+                <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}">
+                <button type="submit">Delete</button>
+            </form>
+            </li>
+  {{/albums}}
+</ul>

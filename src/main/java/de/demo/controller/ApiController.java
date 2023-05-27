@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.demo.model.Album;
+import de.demo.entity.album.Album;
+import de.demo.entity.album.NewAlbumDTO;
 import de.demo.service.AlbumService;
-import de.demo.service.NewAlbumDTO;
 
 @RestController
 public class ApiController {
@@ -27,6 +27,6 @@ public class ApiController {
 
   @PostMapping("/api/albums")
   public Album newVideo(@RequestBody NewAlbumDTO newAlbum) {
-    return albumService.create(newAlbum);
+    return albumService.create(newAlbum,null);
   }
 }
