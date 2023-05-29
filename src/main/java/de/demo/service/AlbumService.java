@@ -10,7 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import de.demo.entity.album.Album;
+import de.demo.entity.album.AlbumEntity;
 import de.demo.entity.album.AlbumSearchDTO;
 import de.demo.entity.album.NewAlbumDTO;
 import de.demo.repo.AlbumRepository;
@@ -22,45 +22,47 @@ public class AlbumService {
 	@Autowired
 	private AlbumRepository repository;
 
-	  @PostConstruct
-	  void initDatabase() {
-	    repository.save(new Album("Def Leppard", "Hysteria", 1987, "rock","admin"));
-	    repository.save(new Album("Poison", "Look what the cat dragged in", 1985, "rock","admin"));
-	    repository.save(new Album("Kiss", "Revenge", 1991, "rock","admin"));
-	  }
-	  
-	  
-	public List<Album> getAlbums() {
-		  return repository.findAll();
+	public AlbumService(AlbumRepository repository) {
+		this.repository = repository;
 	}
-	
-	  public Album create(NewAlbumDTO newAlbum, String username) {
-		    return repository.saveAndFlush(new Album(newAlbum.artist(), newAlbum.title(), newAlbum.yearOfRelease(), newAlbum.genre(), username));
-		  }
-	  
 
-	  public List<Album> search(AlbumSearchDTO search) {
-		  Album probe = new Album();
-		    if (StringUtils.hasText(search.value())) {
-		      probe.setTitle(search.value());
-		      probe.setArtist(search.value());
-		      probe.setDescription(search.value());
-		    }
-		    Example<Album> example = Example.of(probe, //
-		      ExampleMatcher.matchingAny() //
-		        .withIgnoreCase() //
-		        .withStringMatcher(StringMatcher.CONTAINING));
-		    return repository.findAll(example);
-		  }
-	
-	
-	  @PreAuthorize("hasRole('ADMIN')")
-	  public void delete(Long albumId) {
-	    repository.findById(albumId) //
-	      .map(albumEntity -> {
-	        repository.delete(albumEntity);
-	        return true;
-	      }) //
-	      .orElseThrow(() -> new RuntimeException("No album at " + albumId));
-	  }
+	@PostConstruct
+	void initDatabase() {
+		repository.save(new AlbumEntity("Def Leppard", "Hysteria", 1987, "rock", "admin"));
+		repository.save(new AlbumEntity("Poison", "Look what the cat dragged in", 1985, "rock", "admin"));
+		repository.save(new AlbumEntity("Kiss", "Revenge", 1991, "rock", "admin"));
+	}
+
+	public List<AlbumEntity> getAlbums() {
+		return repository.findAll();
+	}
+
+	public AlbumEntity create(NewAlbumDTO newAlbum, String username) {
+		return repository.saveAndFlush(new AlbumEntity(newAlbum.artist(), newAlbum.title(), newAlbum.yearOfRelease(),
+				newAlbum.genre(), username));
+	}
+
+	public List<AlbumEntity> search(AlbumSearchDTO search) {
+		AlbumEntity probe = new AlbumEntity();
+		if (StringUtils.hasText(search.value())) {
+			probe.setTitle(search.value());
+			probe.setArtist(search.value());
+			probe.setDescription(search.value());
+		}
+		Example<AlbumEntity> example = Example.of(probe, //
+				ExampleMatcher.matchingAny() //
+						.withIgnoreCase() //
+						.withStringMatcher(StringMatcher.CONTAINING));
+		return repository.findAll(example);
+	}
+
+	@PreAuthorize("hasRole('ADMIN')")
+	public void delete(Long albumId) {
+		repository.findById(albumId) //
+				.map(albumEntity -> {
+					repository.delete(albumEntity);
+					return true;
+				}) //
+				.orElseThrow(() -> new RuntimeException("No album at " + albumId));
+	}
 }

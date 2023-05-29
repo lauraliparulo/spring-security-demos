@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.demo.entity.album.Album;
+import de.demo.entity.album.AlbumEntity;
 import de.demo.entity.album.NewAlbumDTO;
 import de.demo.service.AlbumService;
 
@@ -21,12 +21,12 @@ public class ApiController {
   }
 
   @GetMapping("/api/albums")
-  public List<Album> all() {
+  public List<AlbumEntity> all() {
     return albumService.getAlbums();
   }
 
   @PostMapping("/api/albums")
-  public Album newVideo(@RequestBody NewAlbumDTO newAlbum) {
+  public AlbumEntity newVideo(@RequestBody NewAlbumDTO newAlbum) {
     return albumService.create(newAlbum,null);
   }
 }

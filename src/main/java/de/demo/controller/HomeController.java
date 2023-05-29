@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import de.demo.entity.album.Album;
+import de.demo.entity.album.AlbumEntity;
 import de.demo.entity.album.AlbumSearchDTO;
 import de.demo.entity.album.NewAlbumDTO;
 import de.demo.service.AlbumService;
@@ -50,7 +50,7 @@ public class HomeController {
   public String universalSearch(@ModelAttribute AlbumSearchDTO search, //
     Model model, //
     Authentication authentication) {
-    List<Album> searchResults = albumService.search(search);
+    List<AlbumEntity> searchResults = albumService.search(search);
     searchResults.forEach(n -> System.out.println("FOUND RECORD: "+n));
     
     model.addAttribute("search", search);

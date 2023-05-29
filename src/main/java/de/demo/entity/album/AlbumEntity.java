@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class Album {
+public class AlbumEntity {
 
   private @Id @GeneratedValue Long id;
   private String title;
@@ -33,12 +33,12 @@ public void setYearOfRelease(int yearOfRelease) {
 }
 
 
-public  Album() {
+public  AlbumEntity() {
 	    this(null, null,0, null,null);
 	  }
 
 	  
-  public Album(String title, String artist, int yearOfRelease, String genre, String username) {
+  public AlbumEntity( String artist,String title, int yearOfRelease, String genre, String username) {
 	  this.id = null;
 	  this.username = username;
 	this.title = title;
