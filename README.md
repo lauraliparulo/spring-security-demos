@@ -13,3 +13,12 @@ The install the application:
 
 Then run the Application java class called "RestReactDemoApplication".
 
+If you have the docker demon running on Ubuntu and can't run the containerized tests and you are on Ubuntu:
+
+> sudo groupadd docker
+
+> sudo gpasswd -a $USER docker
+
+> sudo service docker restart
+
+> sudo chmod 666 /var/run/docker.soc
