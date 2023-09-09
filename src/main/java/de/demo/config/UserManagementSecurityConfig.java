@@ -18,32 +18,40 @@ public class UserManagementSecurityConfig {
 	@Bean
 	CommandLineRunner initUsers(UserAccountRepository repository) {
 		return args -> {
-			repository.save(new UserAccount("alice", "pass", "USER"));
-			repository.save(new UserAccount("bob", "pass", "ROLE_USER"));
-			repository.save(new UserAccount("admin", "pass", "ADMIN"));
+			repository.save(new UserAccount("alice", "1234", "USER"));
+			repository.save(new UserAccount("bob", "1234", "ROLE_USER"));
+			repository.save(new UserAccount("admin", "1234", "ADMIN"));
 		};
 	}
 
 
 	  @Bean
-	  public UserDetailsService userDetailsService(UserAccountRepository repo) {
+	  public UserDetailsService inMemoryUserDetailsService(UserAccountRepository repo) {
 		  
 		    UserDetails user =
 		            User.builder()
-		               .username("user")
-		               .password(passwordEncoder().encode("password"))
+		               .username("alice")
+		               .password(passwordEncoder().encode("1234"))
+		               .authorities("read")
 		               .roles("USER")
 		               .build();
+		    
 		    UserDetails admin =
 		            User.builder()
 		               .username("admin")
-		               .password(passwordEncoder().encode("password"))
-		               .roles("USER","ADMIN")
+		               .password(passwordEncoder().encode("1234"))
+		               .roles("ADMIN")
 		               .build();
+		    
+		    //TODO Database add
+		    
 		    return new InMemoryUserDetailsManager(user,admin);
 		  
 		  
 	  }
+	  
+	  
+	  //TODO UsernamePasswordAuthenticationToken
 	  
 	    @Bean
 	    public BCryptPasswordEncoder passwordEncoder() {

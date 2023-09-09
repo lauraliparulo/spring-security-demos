@@ -7,12 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableMethodSecurity
-@EnableWebSecurity
+//@EnableWebSecurity
 public class WebAuthorizationSecurityConfig {
 
 	
@@ -30,11 +29,10 @@ public class WebAuthorizationSecurityConfig {
 		
 	  @Bean
 	  SecurityFilterChain formLoginFilterChain(HttpSecurity httpSecurity) throws Exception {
-		     	        
+		     	        	 
 		  httpSecurity.authorizeHttpRequests() //
 //          .requestMatchers("/").authenticated()
           .requestMatchers("/login").permitAll()
-          .requestMatchers("/react").permitAll() //
           .requestMatchers(HttpMethod.POST, "/search").authenticated() //
           .requestMatchers(HttpMethod.GET, "/api/**").authenticated()//
           .requestMatchers("/admin").hasRole("ADMIN") //
@@ -49,7 +47,7 @@ public class WebAuthorizationSecurityConfig {
 	  }
 	  
 	  
-//	   @Bean
+//TODO	   @Bean
 //	    public AccessDeniedHandler accessDeniedHandler() {
 //	        return new CustomAccessDeniedHandler();
 //	    }
