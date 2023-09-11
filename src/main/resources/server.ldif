@@ -9,12 +9,12 @@ objectclass: top
 objectclass: organizationalUnit
 ou: groups
 
-dn: uid=john,ou=groups,dc=springframework,dc=org
+dn: uid=admin,ou=groups,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
-cn: John
-sn: John
-uid: john
-userPassword: 12345
+cn: Admin
+sn: Admin
+uid: admin
+userPassword: $2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a
