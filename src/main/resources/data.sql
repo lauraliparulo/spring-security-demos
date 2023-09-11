@@ -1,7 +1,15 @@
-INSERT INTO `spring`.`authorities` VALUES (NULL, 'admin', 'write');
-INSERT INTO `spring`.`authorities` VALUES (NULL, 'admin', 'read');
-INSERT INTO `spring`.`authorities` VALUES (NULL, 'admin', 'delete');
-INSERT INTO `spring`.`authorities` VALUES (NULL, 'alice', 'write');
-INSERT INTO `spring`.`authorities` VALUES (NULL, 'alice', 'read');
-INSERT INTO `spring`.`users` VALUES (NULL, 'alice', '1234', '1');
-INSERT INTO `spring`.`users` VALUES (NULL, 'admin', '1234', '1');
+INSERT INTO users (username, password, enabled)
+  values ('alice',
+    '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a',
+    1);
+    
+INSERT INTO users (username, password, enabled)
+  values ('admin',
+    '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a',
+    1);
+    
+
+INSERT INTO authorities (username, authority)
+  values ('alice', 'ROLE_USER');
+  INSERT INTO authorities (username, authority)
+  values ('admin', 'ROLE_ADMIN');
