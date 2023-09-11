@@ -19,8 +19,7 @@ public class UserManagementSecurityConfig {
 
 	    var manager = new LdapUserDetailsManager(cs);             
 
-	    manager.setUsernameMapper(                                
-	      new DefaultLdapUsernameToDnMapper("ou=groups", "uid"));
+	    manager.setUsernameMapper(new DefaultLdapUsernameToDnMapper("ou=groups", "uid"));
 
 	    manager.setGroupSearchBase("ou=groups");                  
 	    
