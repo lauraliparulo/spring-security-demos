@@ -26,9 +26,16 @@ public class WebAuthorizationSecurityConfig {
 //				.httpBasic(withDefaults());
 //			return httpSecurity.build();
 //		}
+	
 		
 	  @Bean
+	  
 	  SecurityFilterChain formLoginFilterChain(HttpSecurity httpSecurity) throws Exception {
+		  
+		  httpSecurity.httpBasic(c -> {
+	            c.realmName("OTHER");
+	            c.authenticationEntryPoint(new CustomEntryPoint());
+	        });
 		     	        	 
 		  httpSecurity.authorizeHttpRequests() //
 //          .requestMatchers("/").authenticated()
