@@ -12,8 +12,8 @@ public class SecurityContextConfig {
 
 	// the security context is copied to the next thread in case of asynchronous
 	// calls
-	@Bean
-	public InitializingBean initializingBean() {
-		return () -> SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
-	}
+//	@Bean
+//	public InitializingBean initializingBean() {
+//		return () -> SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
+//	}
 }

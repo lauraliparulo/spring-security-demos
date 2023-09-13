@@ -19,11 +19,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         var auth = authorities.stream()
                     .filter(a -> a.getAuthority().equals("read"))
                     .findFirst();
-
-        if (auth.isPresent()) {
-            httpServletResponse.sendRedirect("/home");
-        } else {
-            httpServletResponse.sendRedirect("/error");
-        }
+        
+        System.out.println(auth.toString());
+        httpServletResponse.sendRedirect("/");
+        
+//        if (auth.isPresent()) {
+//            httpServletResponse.sendRedirect("/");
+//        } else {
+//            httpServletResponse.sendRedirect("/error");
+//        }
     }
 }

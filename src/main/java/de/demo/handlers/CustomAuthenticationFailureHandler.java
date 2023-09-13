@@ -1,5 +1,6 @@
 package de.demo.handlers;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 import org.springframework.security.core.AuthenticationException;
@@ -13,7 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e)  {
+    public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException  {
         httpServletResponse.setHeader("failed", LocalDateTime.now().toString());
+        httpServletResponse.sendRedirect("/loginerror");
     }
 }

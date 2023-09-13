@@ -14,6 +14,14 @@ public class CustomEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
         httpServletResponse.addHeader("message", "Luke, I am your father!");
-        httpServletResponse.sendError(HttpStatus.UNAUTHORIZED.value());
+//        httpServletResponse.sendError(HttpStatus.UNAUTHORIZED.value());
+//        httpServletResponse.sendError(HttpStatus..value());
     }
+  
+//    @Override
+//    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
+//        httpServletResponse.addHeader("message", "Luke, I am your father!");
+//        httpServletResponse.sendError(HttpStatus.UNAUTHORIZED.value());
+//    }
+    
 }

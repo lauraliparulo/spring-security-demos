@@ -40,7 +40,7 @@ public class UserManagementSecurityConfig {
 		            User.builder()
 		               .username("alice")
 		               .password("{sha256}97cde38028ad898ebc02e690819fa220e88c62e0699403e94fff291cfffaf8410849f27605abcbc0")
-		               .authorities("read")
+		               .authorities("READ","WRITE")
 		               .roles("USER")
 		               .build();
 		    
@@ -48,7 +48,7 @@ public class UserManagementSecurityConfig {
 		            User.builder()
 		               .username("bob")
 		               .password("{noop}password")
-		               .authorities("read")
+		               .authorities("READ")
 		               .roles("USER")
 		               .build();
 		    
@@ -75,7 +75,7 @@ public class UserManagementSecurityConfig {
 //	  }
 	  
 	  @Bean
-	  public PasswordEncoder passwordEncoder() {
+	  public PasswordEncoder delegatingPasswordEncoder() {
 	    Map<String, PasswordEncoder> encoders = new HashMap<>();
 
 	    encoders.put("noop", NoOpPasswordEncoder.getInstance());
