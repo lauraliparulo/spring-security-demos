@@ -54,12 +54,14 @@ public class WebAuthorizationSecurityConfig {
 		httpSecurity
 				// filters
 				// filters
-				.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class)
+//				.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class)
 				.addFilterAfter(new AuthenticationLoggingFilter(), BasicAuthenticationFilter.class)
 				.addFilterAfter(new CsrfTokenLogger(),CsrfFilter.class)
 				// requests
 				.authorizeHttpRequests() //
-				.requestMatchers("/login").permitAll().requestMatchers(HttpMethod.POST, "/search").authenticated() //
+				.requestMatchers("/login").permitAll()
+				.requestMatchers("/logout").permitAll()
+				.requestMatchers(HttpMethod.POST, "/search").authenticated() //
 				.requestMatchers(HttpMethod.GET, "/api/**").authenticated()//
 				.requestMatchers("/admin").hasRole("ADMIN") //
 				.requestMatchers("/h2-console/**").hasRole("ADMIN")
