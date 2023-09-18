@@ -21,7 +21,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                     .findFirst();
         
         System.out.println(auth.toString());
-        httpServletResponse.sendRedirect("/");
+   httpServletResponse.sendRedirect("/");
         
 //        if (auth.isPresent()) {
 //            httpServletResponse.sendRedirect("/");

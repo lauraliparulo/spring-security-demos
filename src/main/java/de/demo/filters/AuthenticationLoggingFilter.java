@@ -22,8 +22,8 @@ public class AuthenticationLoggingFilter extends OncePerRequestFilter {
 
 	        String requestId = request.getHeader("Request-Id");
 
-	        logger.info("Successfully authenticated request with id " +  requestId);
-
+	        logger.info("Successfully authenticated request with id " +  response.toString());
+	        
 	        filterChain.doFilter(request, response);     
 	  }
 	}

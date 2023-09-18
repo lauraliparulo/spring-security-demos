@@ -18,8 +18,7 @@ public class CsrfTokenLogger implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        Object o = request.getAttribute("_csrf");
-        CsrfToken token = (CsrfToken) o;
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");;
         logger.info("CSRF token " + token.getToken());
 
         filterChain.doFilter(request, response);
