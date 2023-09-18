@@ -72,8 +72,11 @@ public class WebAuthorizationSecurityConfig {
 
 		// httpSecurity.authorizeHttpRequests().anyRequest().denyAll();
 
-		// httpSecurity.authorizeHttpRequests().anyRequest().permitAll();
-
+		// httpSecurity.authorizeHttpRequests().anyRequest().permitAll(
+		
+		
+		
+		httpSecurity.sessionManagement().sessionFixation().newSession();
 		return httpSecurity.build();
 
 	}
