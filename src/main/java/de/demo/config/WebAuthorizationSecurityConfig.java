@@ -82,14 +82,13 @@ public class WebAuthorizationSecurityConfig {
 				.anyRequest().authenticated() //
 				;
 				
-				//.and()
-//		    	
-			//	.httpBasic(withDefaults());
-//				.httpBasic(c -> {
-//					c.realmName("OTHER");
-//					c.authenticationEntryPoint(new CustomEntryPoint());
-//				});
 
+		// httpSecurity.authorizeHttpRequests().anyRequest().denyAll();
+
+		// httpSecurity.authorizeHttpRequests().anyRequest().permitAll(
+	
+		
+	//	httpSecurity.sessionManagement().sessionFixation().newSession();
 
 		return httpSecurity.build();
 
