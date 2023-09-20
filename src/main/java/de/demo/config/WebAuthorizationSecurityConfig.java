@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -20,7 +21,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import de.demo.filters.AuthenticationLoggingFilter;
 import de.demo.filters.CsrfTokenLogger;
-import de.demo.filters.RequestValidationFilter;
+import de.demo.handlers.CustomAccessDeniedHandler;
 import de.demo.handlers.CustomAuthenticationFailureHandler;
 import de.demo.handlers.CustomAuthenticationSuccessHandler;
 
@@ -34,25 +35,33 @@ public class WebAuthorizationSecurityConfig {
 
 	@Autowired
 	private CustomAuthenticationFailureHandler authenticationFailureHandler;
+	
+	
+	@Bean
+	public AccessDeniedHandler accessDeniedHandler() {
+	   return new CustomAccessDeniedHandler();
+	}
+	
 	 
 	@Bean(name = "securityFilterChain")
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-		//TODO Not working!!!!
-		httpSecurity.csrf(c -> {
-	            c.ignoringRequestMatchers("/h2-console/**");
-		});
-		
-		httpSecurity.cors(withDefaults());
-		   
-		httpSecurity.formLogin().successHandler(authenticationSuccessHandler)
-		.failureHandler(authenticationFailureHandler).and().httpBasic(c -> {
-			c.realmName("OTHER");
-			c.authenticationEntryPoint(new CustomEntryPoint());
-		});
 
-		httpSecurity
-				// filters
+		
+		httpSecurity.csrf(csrf -> csrf
+	            .ignoringRequestMatchers("/h2-console/**"))
+
+				.cors(withDefaults())
+				.httpBasic(withDefaults())
+//				.httpBasic(c -> {
+//				c.realmName("OTHER");
+//				c.authenticationEntryPoint(customAuthenticationEntryPoint());
+//			}) 
+				.formLogin().successHandler(authenticationSuccessHandler)
+							.failureHandler(authenticationFailureHandler).and()
+							.exceptionHandling()
+ 						       .accessDeniedHandler(accessDeniedHandler()).and()
+				
 				// filters
 //				.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class)
 				.addFilterAfter(new AuthenticationLoggingFilter(), BasicAuthenticationFilter.class)
@@ -64,17 +73,23 @@ public class WebAuthorizationSecurityConfig {
 				.requestMatchers(HttpMethod.POST, "/search").authenticated() //
 				.requestMatchers(HttpMethod.GET, "/api/**").authenticated()//
 				.requestMatchers("/admin").hasRole("ADMIN") //
+				.requestMatchers("/accessdenied").authenticated() //
+				.requestMatchers("/actuator/**").hasRole("ADMIN") 
+				.requestMatchers("/h2-console").hasRole("ADMIN")
 				.requestMatchers("/h2-console/**").hasRole("ADMIN")
+				.requestMatchers("/loginerror").authenticated() 
 				.requestMatchers(HttpMethod.POST, "/delete/**", "/new-video").authenticated() //
 				.anyRequest().authenticated() //
+				;
+				
+				//.and()
+//		    	
+			//	.httpBasic(withDefaults());
+//				.httpBasic(c -> {
+//					c.realmName("OTHER");
+//					c.authenticationEntryPoint(new CustomEntryPoint());
+//				});
 
-				.and()
-				// .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
-				.httpBasic(withDefaults());
-
-		// httpSecurity.authorizeHttpRequests().anyRequest().denyAll();
-
-		// httpSecurity.authorizeHttpRequests().anyRequest().permitAll();
 
 		return httpSecurity.build();
 
@@ -89,11 +104,14 @@ public class WebAuthorizationSecurityConfig {
 		source.registerCorsConfiguration("/**", configuration);
 		return source;
 	}
+//	
+//	@Bean
+//    public AccessDeniedHandler accessDenied() {
+//        return new CustomAccessDeniedExceptionHandler();
+//    }
+	
 	
 }
 
-//TODO	@Bean
-//	    public AccessDeniedHandler accessDeniedHandler() {
-//	        return new CustomAccessDeniedHandler();
-//	    }
+	
 

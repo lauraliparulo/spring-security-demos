@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
@@ -27,6 +28,7 @@ public class UserManagementSecurityConfig {
 		    UserDetails alice =
 		            User.builder()
 		               .username("alice")
+//		               .password("{sha512}529211542985b8f7af61994670d03d25d55cc9cd1cff8d57bb799c4b586891e112b197530c76744bcd7ef135b58d47d65a0bec221eb5d77793956cf2709dd012")
 		               .password("{sha256}97cde38028ad898ebc02e690819fa220e88c62e0699403e94fff291cfffaf8410849f27605abcbc0")
 		               .authorities("READ","WRITE")
 		               .roles("USER")
@@ -59,8 +61,8 @@ public class UserManagementSecurityConfig {
 	    encoders.put("noop", NoOpPasswordEncoder.getInstance());
 	    encoders.put("bcrypt", new BCryptPasswordEncoder());
 	    encoders.put("scrypt", new SCryptPasswordEncoder(5, 2, 1, 10, 10));
-	    encoders.put("sha", new Sha512PasswordEncoder());
-
+	    encoders.put("sha256", new StandardPasswordEncoder());
+	    encoders.put("sha512", new Sha512PasswordEncoder());
 	    return new DelegatingPasswordEncoder("bcrypt", encoders);
 	  }
 

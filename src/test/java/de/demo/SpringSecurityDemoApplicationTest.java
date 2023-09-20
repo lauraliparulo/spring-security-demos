@@ -7,7 +7,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 //@ActiveProfiles("test")
-class RestReactDemoApplicationTest {
+class SpringSecurityDemoApplicationTest {
 
   @Test
   void contextLoads() {}

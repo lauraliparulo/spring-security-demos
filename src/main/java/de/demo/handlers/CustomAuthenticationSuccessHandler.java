@@ -17,11 +17,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         var authorities = authentication.getAuthorities();
 
         var auth = authorities.stream()
-                    .filter(a -> a.getAuthority().equals("read"))
+                    //.filter(a -> a.getAuthority().equals("READ"))
                     .findFirst();
         
-        System.out.println(auth.toString());
-   httpServletResponse.sendRedirect("/");
+        System.out.println("AUTH -- "+auth.toString());
+       httpServletResponse.sendRedirect("/");
         
 //        if (auth.isPresent()) {
 //            httpServletResponse.sendRedirect("/");

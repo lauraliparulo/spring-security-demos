@@ -65,4 +65,15 @@ public class HomeController {
     albumService.delete(albumId);
     return "redirect:/";
   }
+  
+  @GetMapping("/loginerror")
+  public String loginerror() {
+    return "loginerror";
+  }
+  
+  
+  @GetMapping("/accessdenied")
+  public String accessdenied() {
+    return "accessdenied";
+  }
 }
