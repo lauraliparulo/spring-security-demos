@@ -4,25 +4,20 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import de.demo.filters.AuthenticationLoggingFilter;
-import de.demo.filters.CsrfTokenLogger;
-import de.demo.filters.RequestValidationFilter;
-import de.demo.handlers.CustomAuthenticationFailureHandler;
-import de.demo.handlers.CustomAuthenticationSuccessHandler;
 
 @Configuration
 @EnableMethodSecurity
@@ -64,9 +59,13 @@ public class WebAuthorizationSecurityConfig {
 		return source;
 	}
 
-}
+	private ClientRegistrationRepository clientRepository() {
+		var c = clientRegistration();
+		return new InMemoryClientRegistrationRepository(c);
+	}
 
-//TODO	@Bean
-//	    public AccessDeniedHandler accessDeniedHandler() {
-//	        return new CustomAccessDeniedHandler();
-//	    }
+	private ClientRegistration clientRegistration() {
+		return CommonOAuth2Provider.GITHUB.getBuilder("github").clientId("41979400b93e0f39ae16")
+				.clientSecret("80da7303c4a8e6adb4ea020feb49694b417a9852").build();
+	}
+}
