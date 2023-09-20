@@ -54,6 +54,13 @@
 		</dependency>
 
 
+		<!--   oauth 2-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+
+
 		<!-- testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -91,7 +98,7 @@
 
 	<dependencyManagement>
 		<dependencies>
-		<!-- BOM for Testcontainers supported modules -->
+			<!-- BOM for Testcontainers supported modules -->
 			<dependency>
 				<groupId>org.testcontainers</groupId>
 				<artifactId>testcontainers-bom</artifactId>
@@ -99,7 +106,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			
+
 		</dependencies>
 	</dependencyManagement>
 
