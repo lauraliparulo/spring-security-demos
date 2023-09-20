@@ -34,7 +34,9 @@ public class WebAuthorizationSecurityConfig {
 
 		httpSecurity = httpSecurity.cors(withDefaults());
 
-		httpSecurity.oauth2Login();
+		httpSecurity.oauth2Login(c -> {
+            c.clientRegistrationRepository(clientRepository());
+        });
 
 		httpSecurity.authorizeHttpRequests().requestMatchers("/login").permitAll().requestMatchers("/logout")
 				.permitAll().requestMatchers(HttpMethod.POST, "/search").authenticated() //
