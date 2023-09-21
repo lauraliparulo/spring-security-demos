@@ -22,3 +22,6 @@ If you have the docker demon running on Ubuntu and can't run the containerized t
 > sudo service docker restart
 
 > sudo chmod 666 /var/run/docker.soc
+
+Keycloak start
+> kc.sh start-dev

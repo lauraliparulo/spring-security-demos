@@ -33,11 +33,6 @@ public class HomeController {
     return "index";
   }
 
-  @GetMapping("/react")
-  public String react() {
-    return "react";
-  }
-
   @PostMapping("/new-album")
   public String newAlbum(@ModelAttribute NewAlbumDTO newAlbum,Authentication authentication) {
 
@@ -64,5 +59,16 @@ public class HomeController {
   public String deleteAlbum(@PathVariable Long albumId) {
     albumService.delete(albumId);
     return "redirect:/";
+  }
+  
+  @GetMapping("/loginerror")
+  public String loginerror() {
+    return "loginerror";
+  }
+  
+  
+  @GetMapping("/accessdenied")
+  public String accessdenied() {
+    return "accessdenied";
   }
 }

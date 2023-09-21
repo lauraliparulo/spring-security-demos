@@ -56,7 +56,7 @@ public class AlbumService {
 		return repository.findAll(example);
 	}
 
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasAuthority('SCOPE_profile')")
 	public void delete(Long albumId) {
 		repository.findById(albumId) //
 				.map(albumEntity -> {
