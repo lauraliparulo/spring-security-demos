@@ -12,21 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableMethodSecurity
-@EnableWebSecurity
 public class WebAuthorizationSecurityConfig {
 
-	
-//		@Bean
-//		@Order(1)                                                        
-//		public SecurityFilterChain apiFilterChain(HttpSecurity httpSecurity) throws Exception {
-//			httpSecurity
-//				.securityMatcher("/api/**")                                   
-//				.authorizeHttpRequests(authorize -> authorize
-//					.anyRequest().hasRole("ADMIN")
-//				)
-//				.httpBasic(withDefaults());
-//			return httpSecurity.build();
-//		}
 		
 	  @Bean
 	  SecurityFilterChain formLoginFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -49,9 +36,6 @@ public class WebAuthorizationSecurityConfig {
 	  }
 	  
 	  
-//	   @Bean
-//	    public AccessDeniedHandler accessDeniedHandler() {
-//	        return new CustomAccessDeniedHandler();
-//	    }
+
 
 }
