@@ -13,11 +13,11 @@ public class UserManagementSecurityConfig {
 
 	 @Bean                                                       
 	  public UserDetailsService userDetailsService() {
-	    var cs = new DefaultSpringSecurityContextSource(          
+	    var contextSource = new DefaultSpringSecurityContextSource(          
 	      "ldap://127.0.0.1:33389/dc=springframework,dc=org");
-	    cs.afterPropertiesSet();
+	    contextSource.afterPropertiesSet();
 
-	    var manager = new LdapUserDetailsManager(cs);             
+	    var manager = new LdapUserDetailsManager(contextSource);             
 
 	    manager.setUsernameMapper(new DefaultLdapUsernameToDnMapper("ou=groups", "uid"));
 
@@ -25,9 +25,7 @@ public class UserManagementSecurityConfig {
 	    
 	    return manager;    
 	  }
-	   
-	  //TODO UsernamePasswordAuthenticationToken
-	  
+	   	  
 	    @Bean
 	    public BCryptPasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
