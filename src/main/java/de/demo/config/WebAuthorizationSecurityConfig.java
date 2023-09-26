@@ -28,10 +28,7 @@ public class WebAuthorizationSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		// TODO Not working!!!!
-		httpSecurity.csrf(c -> {
-			c.ignoringRequestMatchers("/h2-console/**");
-		});
+
 
 		httpSecurity.oauth2Login().and().logout().addLogoutHandler(keycloakLogoutHandler).logoutSuccessUrl("/");
 

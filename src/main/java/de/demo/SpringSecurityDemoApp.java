@@ -6,11 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-//@EnableJpaAuditing
-public class RestReactDemoApplication {
+public class SpringSecurityDemoApp {
 
   public static void main(String[] args) {
-    SpringApplication.run(RestReactDemoApplication.class, args);
+    SpringApplication.run(SpringSecurityDemoApp.class, args);
   }
 
   

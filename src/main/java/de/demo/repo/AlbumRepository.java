@@ -1,12 +1,11 @@
 package de.demo.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import de.demo.entity.album.AlbumEntity;
-
-import java.util.List;
 	
 public interface AlbumRepository extends JpaRepository<AlbumEntity, Long> {
 
@@ -18,11 +17,7 @@ public interface AlbumRepository extends JpaRepository<AlbumEntity, Long> {
 
   List<AlbumEntity> findByTitleContainsOrDescriptionContainsAllIgnoreCase(String partialTitle,
     String partialDescription);
-//
-//  //TODO
-//  @Query("select v from Album v where v.title = ?1")
-//  List<AlbumEntity> findCustomerReport(String title);
-  
+
   @PreAuthorize("#entity.username == authentication.name")
   @Override
   void delete(AlbumEntity entity);
