@@ -28,7 +28,6 @@ public class UserManagementSecurityConfig {
 		    UserDetails alice =
 		            User.builder()
 		               .username("alice")
-//		               .password("{sha512}529211542985b8f7af61994670d03d25d55cc9cd1cff8d57bb799c4b586891e112b197530c76744bcd7ef135b58d47d65a0bec221eb5d77793956cf2709dd012")
 		               .password("{sha256}97cde38028ad898ebc02e690819fa220e88c62e0699403e94fff291cfffaf8410849f27605abcbc0")
 		               .authorities("READ","WRITE")
 		               .roles("USER")
