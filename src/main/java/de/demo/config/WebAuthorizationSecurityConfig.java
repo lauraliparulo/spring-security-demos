@@ -21,16 +21,15 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableMethodSecurity
-@EnableWebSecurity
 public class WebAuthorizationSecurityConfig {
 
 	@Bean(name = "securityFilterChain")
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-		// TODO Not working!!!!
-		httpSecurity = httpSecurity.csrf(c -> {
-			c.ignoringRequestMatchers("/h2-console/**");
-		});
+	
+//		httpSecurity = httpSecurity.csrf(c -> {
+//			c.ignoringRequestMatchers("/h2-console/**");
+//		});
 
 		httpSecurity = httpSecurity.cors(withDefaults());
 
